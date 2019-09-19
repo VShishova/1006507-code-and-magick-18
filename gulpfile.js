@@ -12,6 +12,7 @@ gulp.task("server", function () {
     ui: false
   });
   gulp.watch("*.html").on("change", server.reload);
+  gulp.watch("js/*.js").on("change", server.reload);
 });
 
 gulp.task("start", gulp.series("server"));
