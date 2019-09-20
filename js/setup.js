@@ -10,35 +10,48 @@ setupDialog.classList.remove('hidden');
 
 var similarListElement = setupDialog.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
-var fragment = document.createDocumentFragment();
 
 var getRandomElement = function (arr) {
   var randomElement = Math.floor(Math.random() * arr.length);
   return arr[randomElement];
 };
 
-var wizards = [
-  {
-    name: getRandomElement(WIZARD_NAMES) + ' ' + getRandomElement(WIZARD_SURNAMES),
-    coatColor: getRandomElement(WIZARD_COAT_COLORS),
-    eyesColor: getRandomElement(WIZARD_EYES_COLORS)
-  },
-  {
-    name: getRandomElement(WIZARD_NAMES) + ' ' + getRandomElement(WIZARD_SURNAMES),
-    coatColor: getRandomElement(WIZARD_COAT_COLORS),
-    eyesColor: getRandomElement(WIZARD_EYES_COLORS)
-  },
-  {
-    name: getRandomElement(WIZARD_NAMES) + ' ' + getRandomElement(WIZARD_SURNAMES),
-    coatColor: getRandomElement(WIZARD_COAT_COLORS),
-    eyesColor: getRandomElement(WIZARD_EYES_COLORS)
-  },
-  {
-    name: getRandomElement(WIZARD_NAMES) + ' ' + getRandomElement(WIZARD_SURNAMES),
-    coatColor: getRandomElement(WIZARD_COAT_COLORS),
-    eyesColor: getRandomElement(WIZARD_EYES_COLORS)
+var renderWizzardsArray = function (num) {
+  var wizzardArray = [];
+
+  for (var i = 1; i <= num; i++) {
+    var wizzardElement = {
+      name: getRandomElement(WIZARD_NAMES) + ' ' + getRandomElement(WIZARD_SURNAMES),
+      coatColor: getRandomElement(WIZARD_COAT_COLORS),
+      eyesColor: getRandomElement(WIZARD_EYES_COLORS)
+    };
+    wizzardArray.push(wizzardElement);
   }
-];
+  return wizzardArray;
+};
+
+// var wizards = [
+//   {
+//     name: getRandomElement(WIZARD_NAMES) + ' ' + getRandomElement(WIZARD_SURNAMES),
+//     coatColor: getRandomElement(WIZARD_COAT_COLORS),
+//     eyesColor: getRandomElement(WIZARD_EYES_COLORS)
+//   },
+//   {
+//     name: getRandomElement(WIZARD_NAMES) + ' ' + getRandomElement(WIZARD_SURNAMES),
+//     coatColor: getRandomElement(WIZARD_COAT_COLORS),
+//     eyesColor: getRandomElement(WIZARD_EYES_COLORS)
+//   },
+//   {
+//     name: getRandomElement(WIZARD_NAMES) + ' ' + getRandomElement(WIZARD_SURNAMES),
+//     coatColor: getRandomElement(WIZARD_COAT_COLORS),
+//     eyesColor: getRandomElement(WIZARD_EYES_COLORS)
+//   },
+//   {
+//     name: getRandomElement(WIZARD_NAMES) + ' ' + getRandomElement(WIZARD_SURNAMES),
+//     coatColor: getRandomElement(WIZARD_COAT_COLORS),
+//     eyesColor: getRandomElement(WIZARD_EYES_COLORS)
+//   }
+// ];
 
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
@@ -50,9 +63,14 @@ var renderWizard = function (wizard) {
   return wizardElement;
 };
 
-for (var i = 0; i < wizards.length; i++) {
-  fragment.appendChild(renderWizard(wizards[i]));
-}
-similarListElement.appendChild(fragment);
+var fillListElement = function (arr) {
+  var fragment = document.createDocumentFragment();
 
+  for (var i = 0; i < arr.length; i++) {
+    fragment.appendChild(renderWizard(arr[i]));
+  }
+  similarListElement.appendChild(fragment);
+};
+
+fillListElement(renderWizzardsArray(4));
 setupDialog.querySelector('.setup-similar').classList.remove('hidden');
