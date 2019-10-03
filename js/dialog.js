@@ -29,6 +29,8 @@
   var closePopup = function () {
     setupDialog.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscPress);
+    setupDialog.style.top = '';
+    setupDialog.style.left = '';
   };
 
   var setupDialog = document.querySelector('.setup');
@@ -45,7 +47,6 @@
 
   dialogHandle.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
-
     var startCoords = {
       x: evt.clientX,
       y: evt.clientY
@@ -81,6 +82,7 @@
           dialogHandle.removeEventListener('click', onClickPreventDefault);
         };
         dialogHandle.addEventListener('click', onClickPreventDefault);
+
       }
     };
 
