@@ -15,7 +15,7 @@
 
     window.util.colorize(setupDialog.querySelector('.wizard-coat'), setupDialog.querySelector('input[name = "coat-color"]'), window.setup.WIZARD_COAT_COLORS);
     window.util.colorize(setupDialog.querySelector('.wizard-eyes'), setupDialog.querySelector('input[name = "eyes-color"]'), window.setup.WIZARD_EYES_COLORS);
-    window.util.colorize(setupDialog.querySelector('.setup-fireball-wrap'), setupDialog.querySelector('input[name = "fireball-color"]'), window.setup.WIZARD_EYES_COLORS);
+    window.util.colorize(setupDialog.querySelector('.setup-fireball-wrap'), setupDialog.querySelector('input[name = "fireball-color"]'), window.setup.FIREBALL_COLORS);
 
     setupClose.addEventListener('click', function () {
       closePopup();
