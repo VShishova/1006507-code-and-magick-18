@@ -1,27 +1,26 @@
 'use strict';
 
 (function () {
+  var setupDialog = document.querySelector('.setup');
+  var setupOpen = document.querySelector('.setup-open');
+  var dialogHandle = setupDialog.querySelector('.upload');
+
   var onPopupEscPress = function (evt) {
     if (evt.target.nodeName !== 'INPUT') {
-      window.util.isEscEvent(evt, closePopup);
+      window.util.onEscEvent(evt, closePopup);
     }
   };
 
   var openPopup = function () {
     var setupClose = setupDialog.querySelector('.setup-close');
+
     setupDialog.classList.remove('hidden');
     window.setup.fillListElement();
     setupDialog.querySelector('.setup-similar').classList.remove('hidden');
 
-    window.util.colorize(setupDialog.querySelector('.wizard-coat'), setupDialog.querySelector('input[name = "coat-color"]'), window.setup.WIZARD_COAT_COLORS);
-    window.util.colorize(setupDialog.querySelector('.wizard-eyes'), setupDialog.querySelector('input[name = "eyes-color"]'), window.setup.WIZARD_EYES_COLORS);
-    window.util.colorize(setupDialog.querySelector('.setup-fireball-wrap'), setupDialog.querySelector('input[name = "fireball-color"]'), window.setup.FIREBALL_COLORS);
-
-    setupClose.addEventListener('click', function () {
-      closePopup();
-    });
+    setupClose.addEventListener('click', closePopup);
     setupClose.addEventListener('keydown', function (evt) {
-      window.util.isEnterEvent(evt, closePopup);
+      window.util.onEnterEvent(evt, closePopup);
     });
     document.addEventListener('keydown', onPopupEscPress);
   };
@@ -33,16 +32,10 @@
     setupDialog.style.left = '';
   };
 
-  var setupDialog = document.querySelector('.setup');
-  var setupOpen = document.querySelector('.setup-open');
-  var dialogHandle = setupDialog.querySelector('.upload');
-
-  setupOpen.addEventListener('click', function () {
-    openPopup();
-  });
+  setupOpen.addEventListener('click', openPopup);
 
   setupOpen.addEventListener('keydown', function (evt) {
-    window.util.isEnterEvent(evt, openPopup);
+    window.util.onEnterEvent(evt, openPopup);
   });
 
   dialogHandle.addEventListener('mousedown', function (evt) {

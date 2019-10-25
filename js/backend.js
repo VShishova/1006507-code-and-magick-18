@@ -26,20 +26,23 @@
     return xhr;
   };
 
+  var load = function (onLoad, onError) {
+    var xhr = requestConstructor(onLoad, onError);
+
+    xhr.open('GET', URL + '/data');
+    xhr.send();
+  };
+
+  var save = function (data, onLoad, onError) {
+    var xhr = requestConstructor(onLoad, onError);
+
+    xhr.open('POST', URL);
+    xhr.send(data);
+  };
+
   window.backend = {
-    load: function (onLoad, onError) {
-      var xhr = requestConstructor(onLoad, onError);
-
-      xhr.open('GET', URL + '/data');
-      xhr.send();
-    },
-
-    save: function (data, onLoad, onError) {
-      var xhr = requestConstructor(onLoad, onError);
-
-      xhr.open('POST', URL);
-      xhr.send(data);
-    }
+    load: load,
+    save: save
   };
 
 })();
